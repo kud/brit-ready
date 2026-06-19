@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Brit Ready design system — NEAT, minimalist interface (Inter + JetBrains Mono,
+  soft rounded cards). Pixel-art only in the characters. Light + dark themes via
+  next-themes (class strategy); tokens are mapped here and defined per theme below.
+*/
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-accent: var(--accent);
+  --color-gold: var(--gold);
+  --color-danger: var(--danger);
+  --color-success: var(--brand);
+  --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
+
+  --font-sans: var(--font-sans-loaded), system-ui, sans-serif;
+  --font-mono: var(--font-mono-loaded), ui-monospace, monospace;
+  --font-display: var(--font-display-loaded), var(--font-sans-loaded), sans-serif;
+  --font-pixel: var(--font-sans-loaded), system-ui, sans-serif;
+
+  --radius-card: 1.1rem;
+}
+
+/* Union palette — navy base, red primary/CTA, royal-blue accent, white text.
+   Green is kept as a dedicated "correct/ready" semantic, not the brand. */
+:root {
+  color-scheme: light;
+  --bg: #f4f6fc;
+  --bg-2: #e8edf8;
+  --card: #ffffff;
+  --card-2: #eef2fb;
+  --border: rgba(10, 18, 40, 0.1);
+  --border-strong: rgba(10, 18, 40, 0.16);
+  --ink: #ffffff;
+  --fg: #0b1430;
+  --muted: #424d6e;
+  --faint: #69748f;
+  --brand: #0f9d6e;
+  --brand-deep: #0a7d57;
+  --primary: #cf1730;
+  --primary-deep: #aa0f25;
+  --accent: #2e5cff;
+  --gold: #c77d12;
+  --danger: #dc2626;
+  --glow: rgba(46, 92, 255, 0.1);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0a1228;
+  --bg-2: #0c1631;
+  --card: #111c3c;
+  --card-2: #16244c;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --ink: #ffffff;
+  --fg: #eaf0ff;
+  --muted: #aab6d2;
+  --faint: #8593b4;
+  --brand: #34d399;
+  --brand-deep: #10b981;
+  --primary: #e0233c;
+  --primary-deep: #b81229;
+  --accent: #3b6dff;
+  --gold: #f5b53b;
+  --danger: #ff5a6a;
+  --glow: rgba(59, 109, 255, 0.13);
+}
+
+html {
+  height: 100%;
+  /* Always reserve scrollbar space so content/nav never shift when page
+     height changes between screens. No more layout bumps. */
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--color-bg);
+  /* Ambient glow lives in <AmbientBackground/> (a fixed, viewport-pinned layer)
+     rather than here — that avoids both desktop edge-banding and the band a
+     scrolling body gradient shows on tall pages. */
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+/* Slightly larger base type on bigger screens — comfortable on desktop. */
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1280px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Smooth fade between light/dark themes. Colour + border on everything (cheap,
+   doesn't fight hover); background only on the big surfaces. */
+* {
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+body,
+.pixel-panel,
+.pixel-panel-raised,
+.pixel-bar,
+.pixel-btn-ghost,
+input,
+kbd {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.25s ease;
+}
+
+.pixel-art {
+  image-rendering: pixelated;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 0.4rem;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--color-faint);
+  background: color-mix(in srgb, var(--color-fg) 6%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 0.35rem;
+  padding: 0.15rem 0.4rem;
+}
+
+/* ── Neat surface + control primitives ────────────────────────────────── */
+/* In @layer components so Tailwind utilities (bg-*, border-*, ring-*, outline-*)
+   placed on the same element win — selection/override states depend on this. */
+@layer components {
+  /* Flat, subtle surfaces — solid fill, hairline border, faint shadow. */
+  .pixel-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 2px rgba(2, 6, 23, 0.1);
+  }
+
+  .pixel-panel-raised {
+    background: var(--color-card-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-card);
+    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.14);
+  }
+
+  .pixel-corners {
+    border-radius: var(--radius-card);
+  }
+
+  /* Flat buttons — solid fill. On press they depress (inset) and bloom a soft
+     neon glow in their own colour, so the press is felt. */
+  .pixel-btn {
+    --btn-glow: var(--color-primary);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.005em;
+    color: var(--color-ink);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-card);
+    padding: 0.85rem 1.1rem;
+    transition:
+      background-color 0.12s ease,
+      transform 0.06s ease,
+      box-shadow 0.14s ease,
+      filter 0.12s ease;
+    cursor: pointer;
+  }
+  .pixel-btn:hover {
+    background: var(--color-primary-deep);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--btn-glow) 35%, transparent);
+  }
+  .pixel-btn:active {
+    transform: translateY(2px) scale(0.985);
+    filter: brightness(0.94);
+    box-shadow:
+      inset 0 3px 8px rgba(0, 0, 0, 0.3),
+      0 0 0 3px color-mix(in srgb, var(--btn-glow) 22%, transparent),
+      0 0 22px color-mix(in srgb, var(--btn-glow) 55%, transparent);
+  }
+  .pixel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .pixel-btn-accent {
+    --btn-glow: var(--color-accent);
+    color: #fff;
+    background: var(--color-accent);
+  }
+  .pixel-btn-accent:hover {
+    background: color-mix(in srgb, var(--color-accent) 85%, black);
+  }
+
+  .pixel-btn-ghost {
+    --btn-glow: var(--color-accent);
+    color: var(--color-fg);
+    background: var(--color-card-2);
+    border: 1px solid var(--color-border-strong);
+  }
+  .pixel-btn-ghost:hover {
+    background: var(--color-card);
+  }
+
+  .pixel-bar {
+    background: color-mix(in srgb, var(--color-fg) 8%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    height: 0.6rem;
+    overflow: hidden;
+  }
+  .pixel-bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-brand-deep), var(--color-brand));
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .text-shadow-pixel {
+    text-shadow: none;
+  }
+}
+
+/* ── Pixel-character animations (kept retro/stepped for charm) ────────── */
+@keyframes pixel-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes pixel-pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pixel-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+.animate-bob {
+  animation: pixel-bob 1.8s steps(6) infinite;
+}
+.animate-pop {
+  animation: pixel-pop 0.3s ease-out both;
+}
+.animate-shake {
+  animation: pixel-shake 0.3s ease;
+}
