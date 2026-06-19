@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# Brit Ready
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat-square&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-brit--ready.vercel.app-22C55E?style=flat-square)](https://brit-ready.vercel.app)
+
+**A gamified, local-first PWA to help anyone prepare for the UK's Life in the UK Test.**
+
+[Features](#-features) • [Live Demo](#-live-demo) • [Quick Start](#-quick-start) • [Scripts](#-scripts) • [Project Structure](#-project-structure) • [Tech Stack](#-tech-stack) • [Deploy](#-deploy) • [Disclaimer](#-disclaimer)
+
+</div>
+
+---
+
+## 🌟 Features
+
+- 🧠 **Mastery system** — every examinable fact is tracked as a `KnowledgeItem`; questions are interchangeable variants of the same fact, so you can't pass by memorising wording alone
+- 📊 **Readiness score** — one honest signal (not ready / almost ready / likely ready) calibrated to the real 75% pass mark, so you book your test with confidence
+- 📝 **Realistic mock exams** — 24-question sessions with a 45-minute countdown and the actual pass threshold
+- 🔄 **Spaced revision** — weak facts resurface in fresh wording until they stick; the harder you find a topic, the more it comes back
+- 🔒 **Local-first & private** — all progress lives in IndexedDB via zustand persist; no account required, no data sent to a server, with export/import for backup
+- 📱 **Installable PWA** — service worker via Serwist, full manifest, installable on mobile and desktop; works offline after the first load
+- 🎨 **Polished UX** — Union-flag colour palette, light/dark themes, an illustrated pixel mascot coach, subtle sounds, reminders, and a responsive layout (mobile bottom-sheet ↔ desktop modal/sidebar)
+
+> **Non-official** — original practice questions only; not affiliated with GOV.UK, the Home Office, or TSO.
+
+---
+
+## 🔗 Live Demo
+
+**[brit-ready.vercel.app](https://brit-ready.vercel.app)**
+
+No sign-up. Open it, start practising. Install it to your home screen for offline access.
+
+---
+
+## 🚀 Quick Start
+
+Requires Node.js 20+.
 
 ```bash
+git clone https://github.com/kud/brit-ready.git
+cd brit-ready
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The onboarding flow will walk you through your first session.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Scripts
 
-## Learn More
+| Command             | Description                                                          |
+| ------------------- | -------------------------------------------------------------------- |
+| `npm run dev`       | Development server with Turbopack                                    |
+| `npm run build`     | Production build (**`next build --webpack`** — required for Serwist) |
+| `npm run start`     | Serve the production build                                           |
+| `npm run lint`      | ESLint                                                               |
+| `npm run typecheck` | TypeScript type-check (no emit)                                      |
+| `npm run format`    | Prettier (write)                                                     |
+| `npm run icons`     | Generate icons from source                                           |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🗂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                   # App Router
+│   ├── page.tsx           # Landing page
+│   ├── about/             # Disclaimer / about
+│   └── app/               # App shell
+│       ├── dashboard/     # Readiness score overview
+│       ├── practice/      # Question-by-question practice
+│       ├── mock/          # Timed mock exam
+│       ├── revise/        # Spaced revision queue
+│       ├── learn/         # Browse knowledge items
+│       ├── progress/      # Mastery charts
+│       ├── onboarding/    # First-run flow
+│       ├── settings/      # Data export/import, preferences
+│       └── category/      # Per-topic drill
+├── components/            # UI components (mascot, quiz-runner, drawer, date picker…)
+├── content/               # Question bank, KnowledgeItems, categories (~150+ questions, 10 topics)
+└── lib/                   # zustand store, session logic, coach lines, sounds, data transfer
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🏗 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Library                                                                                                  | Role                                                    |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Next.js 16](https://nextjs.org)                                                                         | App Router, React Server Components, image optimisation |
+| [React 19](https://react.dev)                                                                            | UI runtime                                              |
+| [TypeScript](https://www.typescriptlang.org)                                                             | Strict types throughout                                 |
+| [Tailwind CSS v4](https://tailwindcss.com)                                                               | Utility-first styling                                   |
+| [zustand](https://github.com/pmndrs/zustand) + [idb-keyval](https://github.com/jakearchibald/idb-keyval) | Local-first state with IndexedDB persistence            |
+| [Framer Motion (`motion`)](https://motion.dev)                                                           | Animations and transitions                              |
+| [Serwist / `@serwist/next`](https://serwist.pages.dev)                                                   | Service worker, offline caching, PWA                    |
+| [vaul](https://github.com/emilkowalski/vaul)                                                             | Mobile bottom-sheet drawer                              |
+| [next-themes](https://github.com/pacocoursey/next-themes)                                                | Light / dark theme                                      |
+| [lucide-react](https://lucide.dev)                                                                       | Icon set                                                |
+| [canvas-confetti](https://github.com/catdad/canvas-confetti)                                             | Pass celebration effect                                 |
+
+---
+
+## 🚢 Deploy
+
+The project is deployed on Vercel. One critical detail: the build command is pinned to **`next build --webpack`** in `vercel.json`. This is intentional — Serwist's service worker generation is webpack-only, and Next.js 16 now defaults to Turbopack. Using the default `next build` (Turbopack) would silently omit the service worker, breaking offline support and the PWA install prompt.
+
+If you fork and deploy your own instance, ensure your Vercel project's build command matches:
+
+```
+next build --webpack
+```
+
+---
+
+## ⚠️ Disclaimer
+
+Brit Ready is an **independent, non-official** preparation tool created to help people study for the Life in the UK Test.
+
+It is **not affiliated with, endorsed by, or produced by** GOV.UK, the Home Office, TSO (The Stationery Office), or any official Life in the UK Test provider. All practice questions are original works and do not reproduce real exam questions. Passing this app's mock exams does not guarantee passing the official test.
+
+---
+
+<div align="center">
+
+MIT © [kud](https://github.com/kud) — Made with ❤️
+
+</div>

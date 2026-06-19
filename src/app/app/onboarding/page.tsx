@@ -23,7 +23,7 @@ const OnboardingInner = () => {
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-md flex-col gap-6 px-5 pt-10 pb-10">
+    <div className="mx-auto flex max-w-md flex-col gap-6 px-5 pt-10 pb-10">
       <div className="flex flex-col items-center gap-3 text-center">
         <Mascot mood="happy" scale={11} />
         <h1 className="text-3xl font-extrabold tracking-tight">Brit Ready</h1>
@@ -70,7 +70,7 @@ const OnboardingInner = () => {
         </div>
       </div>
 
-      <div className="mt-auto flex flex-col gap-3">
+      <div className="flex flex-col gap-3">
         <button
           onClick={() => start(ROUTES.learn("diagnostic"))}
           className="pixel-btn flex w-full items-center justify-center gap-2"

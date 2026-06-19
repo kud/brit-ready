@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, BookOpenCheck, Gauge, Target, Timer, Trophy } from "lucide-react";
+import { ArrowRight, BookOpenCheck, Gauge, Target, Timer } from "lucide-react";
 import { Mascot } from "@/components/mascot";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { UnionJack } from "@/components/union-jack";
@@ -141,24 +141,19 @@ const LandingPage = () => {
           transition={{ delay: 0.1 }}
           className="max-w-xl text-lg text-muted"
         >
-          Turn an overwhelming handbook into a manageable game. Practise original questions,
-          sit realistic mocks, and always know exactly when you&apos;re ready.
+          The official handbook is dense and easy to forget. Brit Ready turns it into quick,
+          gamified practice — and tells you the moment you&apos;re genuinely ready.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center"
+          className="flex flex-col items-center gap-2"
         >
-          <Link href={startHref} className="pixel-btn w-full px-7 text-center sm:w-auto">
+          <Link href={startHref} className="pixel-btn px-8 text-center">
             {startLabel}
           </Link>
-          <a
-            href="#how-it-works"
-            className="pixel-btn pixel-btn-ghost w-full px-7 text-center sm:w-auto"
-          >
-            How it works
-          </a>
+          <p className="text-xs text-faint">Free · no account · works offline</p>
         </motion.div>
 
         <div className="mt-6 flex items-center gap-6">
@@ -172,10 +167,7 @@ const LandingPage = () => {
       </section>
 
       {/* Features */}
-      <section
-        id="how-it-works"
-        className="mx-auto w-full max-w-6xl scroll-mt-8 px-5 pb-16"
-      >
+      <section className="mx-auto w-full max-w-6xl px-5 pb-16">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f, i) => {
             const Icon = f.icon;
@@ -198,24 +190,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA band */}
-      <section className="mx-auto w-full max-w-3xl px-5 pb-20">
-        <div className="pixel-panel-raised flex flex-col items-center gap-4 px-6 py-10 text-center">
-          <Trophy size={32} className="text-gold" />
-          <h2 className="text-2xl font-extrabold tracking-tight md:text-3xl">
-            Ready to start your streak?
-          </h2>
-          <p className="max-w-md text-muted">
-            Everything runs in your browser. No account, no payment — your progress stays on
-            your device.
-          </p>
-          <Link href={startHref} className="pixel-btn px-8">
-            {startLabel}
-          </Link>
-        </div>
-      </section>
-
-      <footer className="mx-auto w-full max-w-6xl px-5 pb-10 text-center text-xs text-faint">
+      <footer className="mx-auto w-full max-w-6xl px-5 pt-4 pb-10 text-center text-xs text-faint">
         Independent, non-official preparation tool — not affiliated with GOV.UK or the Home
         Office.{" "}
         <Link href={ROUTES.about} className="underline">
