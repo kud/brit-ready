@@ -86,13 +86,6 @@ html {
   /* Always reserve scrollbar space so content/nav never shift when page
      height changes between screens. No more layout bumps. */
   scrollbar-gutter: stable;
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
 }
 
 body {
