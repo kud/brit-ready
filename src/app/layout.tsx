@@ -21,14 +21,19 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://brit-ready.vercel.app";
+const siteTitle = "Brit Ready — Life in the UK";
+const siteDescription =
+  "A non-official, gamified way to prepare for the Life in the UK Test. Learn every fact, practise the format, and know when you are ready.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   applicationName: "Brit Ready",
   title: {
-    default: "Brit Ready — Life in the UK",
+    default: siteTitle,
     template: "%s · Brit Ready",
   },
-  description:
-    "A non-official, gamified way to prepare for the Life in the UK Test. Learn every fact, practise the format, and know when you are ready.",
+  description: siteDescription,
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -36,13 +41,27 @@ export const metadata: Metadata = {
     title: "Brit Ready",
   },
   formatDetection: { telephone: false },
+  openGraph: {
+    type: "website",
+    siteName: "Brit Ready",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    images: [{ url: "/icons/icon-512.png", width: 512, height: 512, alt: "Brit Ready" }],
+  },
+  twitter: {
+    card: "summary",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/icons/icon-512.png"],
+  },
 };
 
+// No maximumScale/userScalable lock — pinch-zoom must stay available (WCAG 1.4.4).
 export const viewport: Viewport = {
   themeColor: "#0a1228",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
   viewportFit: "cover",
 };
 
