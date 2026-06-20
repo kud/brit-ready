@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { AboutContent } from "@/components/about-content";
+import { Mascot } from "@/components/mascot";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { DateField } from "@/components/date-field";
 import { KofiButton } from "@/components/kofi-button";
@@ -174,28 +175,32 @@ export const SettingsContent = () => {
       </Section>
 
       <Section label="Language">
-        <button
+        <motion.button
           type="button"
           onClick={pokeLanguage}
           aria-label="Language: English"
+          key={langJoke?.n ?? "lang-idle"}
+          animate={langJoke ? { x: [0, -3, 3, -2, 2, 0] } : {}}
+          transition={{ duration: 0.35 }}
           className="flex w-full items-center justify-between rounded-xl border border-border bg-card-2 px-3 py-2.5 text-sm text-fg transition-colors hover:bg-card"
         >
           <span className="flex items-center gap-2">
             <Globe size={16} className="text-accent" /> English
           </span>
           <ChevronDown size={16} className="text-faint" />
-        </button>
+        </motion.button>
         <AnimatePresence mode="wait">
           {langJoke && (
-            <motion.p
+            <motion.div
               key={langJoke.n}
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="text-xs italic text-muted"
+              className="flex items-center gap-2"
             >
-              {langJoke.line}
-            </motion.p>
+              <Mascot mood="think" scale={3} bob={false} />
+              <p className="text-xs italic text-muted">{langJoke.line}</p>
+            </motion.div>
           )}
         </AnimatePresence>
       </Section>
