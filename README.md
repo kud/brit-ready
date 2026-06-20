@@ -6,7 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat-square&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-brit--ready.vercel.app-22C55E?style=flat-square)](https://brit-ready.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-brit--ready.kud.io-22C55E?style=flat-square)](https://brit-ready.kud.io)
 
 **A gamified, local-first PWA to help anyone prepare for the UK's Life in the UK Test.**
 
@@ -32,7 +32,7 @@
 
 ## 🔗 Live Demo
 
-**[brit-ready.vercel.app](https://brit-ready.vercel.app)**
+**[brit-ready.kud.io](https://brit-ready.kud.io)**
 
 No sign-up. Open it, start practising. Install it to your home screen for offline access.
 
