@@ -81,7 +81,10 @@ export const computeStats = (
   const recentMocks = mockAttempts.slice(0, 3);
   const recentMockAvgPercent = recentMocks.length
     ? Math.round(
-        (recentMocks.reduce((sum, a) => sum + a.score / a.totalQuestions, 0) /
+        (recentMocks.reduce(
+          (sum, a) => sum + (a.totalQuestions ? a.score / a.totalQuestions : 0),
+          0,
+        ) /
           recentMocks.length) *
           100,
       )

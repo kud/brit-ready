@@ -86,6 +86,7 @@ export const QuizRunner = ({
 
   const startedAt = useRef<number | null>(null);
   const results = useRef<SessionItemResult[]>([]);
+  const finished = useRef(false);
   const [index, setIndex] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -104,7 +105,18 @@ export const QuizRunner = ({
   const isLast = index === questions.length - 1;
   const options = optionsByQuestion.get(question.id) ?? question.options;
 
+  // The mock timer reads the latest selection and question at expiry without
+  // listing them as effect deps — otherwise every tap would restart the tick.
+  const selectedIdRef = useRef(selectedId);
+  const questionRef = useRef(question);
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+    questionRef.current = question;
+  }, [selectedId, question]);
+
   const finish = useCallback(() => {
+    if (finished.current) return;
+    finished.current = true;
     const items = [...results.current];
     const result: SessionResult = {
       mode,
@@ -140,8 +152,9 @@ export const QuizRunner = ({
   useEffect(() => {
     if (immediate || outcome || counting) return;
     if (timeLeft <= 0) {
-      if (selectedId) {
-        results.current.push(buildItem(question, selectedId, reviewQuestionIds));
+      const selected = selectedIdRef.current;
+      if (selected) {
+        results.current.push(buildItem(questionRef.current, selected, reviewQuestionIds));
       }
       for (let i = results.current.length; i < questions.length; i += 1) {
         results.current.push(buildItem(questions[i], null, reviewQuestionIds));
@@ -151,17 +164,7 @@ export const QuizRunner = ({
     }
     const id = setTimeout(() => setTimeLeft((t) => t - 1000), 1000);
     return () => clearTimeout(id);
-  }, [
-    immediate,
-    outcome,
-    counting,
-    timeLeft,
-    selectedId,
-    question,
-    questions,
-    reviewQuestionIds,
-    finish,
-  ]);
+  }, [immediate, outcome, counting, timeLeft, questions, reviewQuestionIds, finish]);
 
   const handleSelect = (optionId: string) => {
     if (immediate) {

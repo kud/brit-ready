@@ -3,6 +3,8 @@ import { useProgress } from "./store";
 // Backup / restore for the local-first progress. Since everything lives on the
 // device, export gives users a portable JSON they can re-import elsewhere.
 
+const SCHEMA_VERSION = 1;
+
 const FIELDS = [
   "onboarded",
   "userName",
@@ -20,7 +22,7 @@ const FIELDS = [
 
 export const exportProgress = (): string => {
   const state = useProgress.getState() as unknown as Record<string, unknown>;
-  const data: Record<string, unknown> = { app: "brit-ready", version: 1 };
+  const data: Record<string, unknown> = { app: "brit-ready", version: SCHEMA_VERSION };
   for (const field of FIELDS) data[field] = state[field];
   return JSON.stringify(data, null, 2);
 };
@@ -35,7 +37,8 @@ export const importProgress = (json: string): boolean => {
   if (
     !parsed ||
     typeof parsed !== "object" ||
-    (parsed as Record<string, unknown>).app !== "brit-ready"
+    (parsed as Record<string, unknown>).app !== "brit-ready" ||
+    (parsed as Record<string, unknown>).version !== SCHEMA_VERSION
   ) {
     return false;
   }

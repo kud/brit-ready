@@ -32,9 +32,9 @@ export const useDerived = () => {
 
   return useMemo(() => {
     const stats = computeStats(mastery, attempts, answers);
-    const today = dayKey(
-      now || Date.parse(`${lastPracticeDay ?? "1970-01-01"}T00:00:00`) + 1,
-    );
+    // On the server `now` is 0; render the streak zero-state rather than
+    // guessing "today" from lastPracticeDay, which flips alive→dead on hydration.
+    const today = now ? dayKey(now) : "1970-01-01";
     const readiness = computeReadiness({ stats, streakCount, lastPracticeDay, today });
     const level = levelFromXp(xp);
     const toReview = reviewableCount({ mastery, wrongQuestionIds }, now);
