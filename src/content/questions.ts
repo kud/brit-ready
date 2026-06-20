@@ -838,10 +838,10 @@ export const questions: Question[] = [
   q(
     "q-history-22",
     ["nhs-founded-1948"],
-    "Which politician is associated with the founding of the NHS?",
+    "Which Health Minister led the creation of the NHS in 1948?",
     "Aneurin Bevan",
     ["Winston Churchill", "Margaret Thatcher", "Clement Attlee"],
-    "Aneurin Bevan led the creation of the NHS in 1948.",
+    "Aneurin Bevan, as Minister of Health, led the creation of the NHS in 1948 — under Clement Attlee's government.",
     "hard",
   ),
   q(
