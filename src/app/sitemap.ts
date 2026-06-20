@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://brit-ready.vercel.app";
+const SITE_URL = "https://brit-ready.kud.io";
 
 const sitemap = (): MetadataRoute.Sitemap => [
   { url: SITE_URL, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },

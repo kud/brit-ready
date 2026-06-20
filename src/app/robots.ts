@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://brit-ready.vercel.app";
+const SITE_URL = "https://brit-ready.kud.io";
 
 // Index the marketing pages; keep the app shell (personal, client-rendered)
 // out of search results.

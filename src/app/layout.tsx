@@ -21,7 +21,7 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://brit-ready.vercel.app";
+const SITE_URL = "https://brit-ready.kud.io";
 const siteTitle = "Brit Ready — Life in the UK";
 const siteDescription =
   "A non-official, gamified way to prepare for the Life in the UK Test. Learn every fact, practise the format, and know when you are ready.";
