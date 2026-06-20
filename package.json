@@ -10,7 +10,9 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "icons": "zsh scripts/generate-icons.sh",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "canvas-confetti": "1.9.4",
@@ -38,6 +40,8 @@
     "prettier": "3.8.4",
     "serwist": "9.5.11",
     "tailwindcss": "^4",
-    "typescript": "^6"
+    "typescript": "^6",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.9"
   }
 }
