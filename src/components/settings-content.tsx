@@ -2,7 +2,17 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Bell, Download, Trash2, Upload, Volume2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Bell,
+  ChevronDown,
+  Download,
+  Globe,
+  Trash2,
+  Upload,
+  Volume2,
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { AboutContent } from "@/components/about-content";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { DateField } from "@/components/date-field";
@@ -15,6 +25,26 @@ import { soundTap } from "@/lib/sound";
 import { useProgress } from "@/lib/store";
 import { useUI } from "@/lib/ui-store";
 import { cn } from "@/lib/utils";
+
+// The language "selector" is a running joke: the app is English-only — which is
+// rather the point of an English test. Tapping it deadpans back, never the same
+// line twice in a row. The flagship line (index 0) always lands on the first tap.
+const languageJokes = [
+  "Are you serious? You're passing the English test.",
+  "English only — that's rather the whole point.",
+  "Nice try. The exam isn't in French.",
+  "We did consider other languages. Then we remembered the test.",
+  "Bold move, revising for an English test in another language.",
+  "There's exactly one option, and you're looking right at it.",
+  'Translation available: "no".',
+  "The guard says no. The guard always says no.",
+  "Cheeky. Still English, though.",
+];
+
+// Uniformly picks one of the *other* lines, so the quip never repeats back-to-back.
+const differentJokeIndex = (last: number) =>
+  (last + 1 + Math.floor(Math.random() * (languageJokes.length - 1))) %
+  languageJokes.length;
 
 const Section = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="flex flex-col gap-2">
@@ -77,6 +107,8 @@ export const SettingsContent = () => {
   const [notice, setNotice] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [view, setView] = useState<"main" | "about">("main");
+  const [langJoke, setLangJoke] = useState<{ n: number; line: string } | null>(null);
+  const lastJoke = useRef(-1);
 
   const toggleReminders = async (next: boolean) => {
     if (!next) return setReminders(false);
@@ -94,6 +126,13 @@ export const SettingsContent = () => {
     resetProgress();
     closeSettings();
     router.push(ROUTES.landing);
+  };
+
+  const pokeLanguage = () => {
+    soundTap();
+    const next = lastJoke.current === -1 ? 0 : differentJokeIndex(lastJoke.current);
+    lastJoke.current = next;
+    setLangJoke((prev) => ({ n: (prev?.n ?? 0) + 1, line: languageJokes[next] }));
   };
 
   if (view === "about") {
@@ -132,6 +171,33 @@ export const SettingsContent = () => {
 
       <Section label="Theme">
         <ThemeSelector />
+      </Section>
+
+      <Section label="Language">
+        <button
+          type="button"
+          onClick={pokeLanguage}
+          aria-label="Language: English"
+          className="flex w-full items-center justify-between rounded-xl border border-border bg-card-2 px-3 py-2.5 text-sm text-fg transition-colors hover:bg-card"
+        >
+          <span className="flex items-center gap-2">
+            <Globe size={16} className="text-accent" /> English
+          </span>
+          <ChevronDown size={16} className="text-faint" />
+        </button>
+        <AnimatePresence mode="wait">
+          {langJoke && (
+            <motion.p
+              key={langJoke.n}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="text-xs italic text-muted"
+            >
+              {langJoke.line}
+            </motion.p>
+          )}
+        </AnimatePresence>
       </Section>
 
       <Section label="Mascot">
