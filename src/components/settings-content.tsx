@@ -43,7 +43,7 @@ const languageJokes = [
 ];
 
 // The quip lingers, then fades on its own if you stop tapping.
-const JOKE_TIMEOUT_MS = 12_000;
+const JOKE_TIMEOUT_MS = 6_000;
 
 // Uniformly picks one of the *other* lines, so the quip never repeats back-to-back.
 const differentJokeIndex = (last: number) =>
