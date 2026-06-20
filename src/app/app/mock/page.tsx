@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { Play, Timer } from "lucide-react";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Mascot } from "@/components/mascot";
 import { PageHeader } from "@/components/page-header";
 import { QuizRunner } from "@/components/quiz-runner";
@@ -103,10 +102,6 @@ const MockInner = () => {
   );
 };
 
-const MockPage = () => (
-  <HydrationGate>
-    <MockInner />
-  </HydrationGate>
-);
+const MockPage = () => <MockInner />;
 
 export default MockPage;

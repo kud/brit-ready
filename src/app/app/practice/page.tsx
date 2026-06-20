@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { CategoryCard } from "@/components/category-card";
-import { HydrationGate } from "@/components/hydration-gate";
 import { PageHeader } from "@/components/page-header";
 import { ROUTES } from "@/lib/routes";
 import { useDerived } from "@/lib/use-derived";
@@ -70,10 +69,6 @@ const PracticeInner = () => {
   );
 };
 
-const PracticePage = () => (
-  <HydrationGate>
-    <PracticeInner />
-  </HydrationGate>
-);
+const PracticePage = () => <PracticeInner />;
 
 export default PracticePage;

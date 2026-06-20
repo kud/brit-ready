@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CalendarDays, ExternalLink, Layers, Play, Settings, Timer } from "lucide-react";
 import { CoachBubble } from "@/components/coach-bubble";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Icon } from "@/components/icon";
 import { ReadinessGauge } from "@/components/readiness-gauge";
 import { coachGreeting } from "@/lib/coach";
@@ -214,10 +213,6 @@ const DashboardInner = () => {
   );
 };
 
-const DashboardPage = () => (
-  <HydrationGate>
-    <DashboardInner />
-  </HydrationGate>
-);
+const DashboardPage = () => <DashboardInner />;
 
 export default DashboardPage;

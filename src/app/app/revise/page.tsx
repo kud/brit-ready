@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ChevronRight, Layers, RotateCcw } from "lucide-react";
 import { CategoryCard } from "@/components/category-card";
 import { FactCard } from "@/components/fact-card";
-import { HydrationGate } from "@/components/hydration-gate";
 import { PageHeader } from "@/components/page-header";
 import { ROUTES } from "@/lib/routes";
 import { commonMistakes } from "@/lib/stats";
@@ -98,10 +97,6 @@ const ReviseInner = () => {
   );
 };
 
-const RevisePage = () => (
-  <HydrationGate>
-    <ReviseInner />
-  </HydrationGate>
-);
+const RevisePage = () => <ReviseInner />;
 
 export default RevisePage;

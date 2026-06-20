@@ -4,7 +4,6 @@ import Link from "next/link";
 import { BarChart3, Flame, Lock } from "lucide-react";
 import { badges } from "@/lib/badges";
 import { levelFromXp } from "@/lib/gamification";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Icon } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
 import { ReadinessGauge } from "@/components/readiness-gauge";
@@ -144,10 +143,6 @@ const ProgressInner = () => {
   );
 };
 
-const ProgressPage = () => (
-  <HydrationGate>
-    <ProgressInner />
-  </HydrationGate>
-);
+const ProgressPage = () => <ProgressInner />;
 
 export default ProgressPage;

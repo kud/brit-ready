@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Play } from "lucide-react";
 import { DateField } from "@/components/date-field";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Mascot } from "@/components/mascot";
 import { ROUTES } from "@/lib/routes";
 import { useProgress } from "@/lib/store";
@@ -88,10 +87,6 @@ const OnboardingInner = () => {
   );
 };
 
-const OnboardingPage = () => (
-  <HydrationGate>
-    <OnboardingInner />
-  </HydrationGate>
-);
+const OnboardingPage = () => <OnboardingInner />;
 
 export default OnboardingPage;

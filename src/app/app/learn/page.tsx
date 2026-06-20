@@ -4,7 +4,6 @@ import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { categoryById } from "@/content/categories";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Mascot } from "@/components/mascot";
 import { QuizRunner } from "@/components/quiz-runner";
 import { ROUTES } from "@/lib/routes";
@@ -86,11 +85,7 @@ const LearnInner = () => {
     () => configFromParams(params.get("mode") ?? "mixed", params.get("category")),
     [params],
   );
-  return (
-    <HydrationGate>
-      <LearnSession config={config} />
-    </HydrationGate>
-  );
+  return <LearnSession config={config} />;
 };
 
 const LearnPage = () => (

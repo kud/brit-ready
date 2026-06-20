@@ -1,0 +1,59 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - img "Brit Ready guard" [ref=e6]
+        - text: Brit Ready
+      - generic [ref=e155]:
+        - button "Toggle theme" [ref=e156]
+        - link "Open app" [ref=e158] [cursor=pointer]:
+          - /url: /app/onboarding
+          - text: Open app
+          - img [ref=e159]
+    - generic [ref=e161]:
+      - button "Poke the guard" [ref=e163] [cursor=pointer]:
+        - img "Brit Ready guard" [ref=e165]
+      - generic [ref=e314]:
+        - img [ref=e315]
+        - text: Gamified Life in the UK prep
+      - heading "Pass the Life in the UK Test with total confidence." [level=1] [ref=e321]:
+        - text: Pass the Life in the UK Test
+        - generic [ref=e322]: with total confidence.
+      - paragraph [ref=e323]: The official handbook is dense and easy to forget. Brit Ready turns it into quick, gamified practice — and tells you the moment you're genuinely ready.
+      - generic [ref=e324]:
+        - link "Start free — no sign-up" [ref=e325] [cursor=pointer]:
+          - /url: /app/onboarding
+        - paragraph [ref=e326]: Free · no account · works offline
+      - generic [ref=e327]:
+        - generic [ref=e328]:
+          - generic [ref=e329]: 150+
+          - generic [ref=e330]: Original questions
+        - generic [ref=e331]:
+          - generic [ref=e332]: "10"
+          - generic [ref=e333]: Topic areas
+        - generic [ref=e334]:
+          - generic [ref=e335]: "24"
+          - generic [ref=e336]: Question mocks
+    - generic [ref=e338]:
+      - generic [ref=e339]:
+        - img [ref=e341]
+        - heading "Learn every fact" [level=3] [ref=e344]
+        - paragraph [ref=e345]: 99 knowledge items mapped to the official handbook — master the fact, not the answer position.
+      - generic [ref=e346]:
+        - img [ref=e348]
+        - heading "Realistic mock exams" [level=3] [ref=e351]
+        - paragraph [ref=e352]: 24 questions, a 45-minute timer and the real 75% pass mark. No surprises on the day.
+      - generic [ref=e353]:
+        - img [ref=e355]
+        - heading "Readiness score" [level=3] [ref=e358]
+        - paragraph [ref=e359]: One honest signal — not ready, almost ready, or likely ready — so you book with confidence.
+      - generic [ref=e360]:
+        - img [ref=e362]
+        - heading "Fix your mistakes" [level=3] [ref=e366]
+        - paragraph [ref=e367]: Weak facts resurface in new wording until they stick. Your misses become tomorrow's wins.
+    - contentinfo [ref=e368]:
+      - text: Independent, non-official preparation tool — not affiliated with GOV.UK or the Home Office.
+      - link "Read the disclaimer" [ref=e369] [cursor=pointer]:
+        - /url: /about
+  - button "Open Next.js Dev Tools" [ref=e375] [cursor=pointer]:
+    - img [ref=e376]

@@ -7,7 +7,6 @@ import { ChevronLeft, Play } from "lucide-react";
 import { categoryById } from "@/content/categories";
 import { knowledgeItems } from "@/content/knowledge-items";
 import { FactCard } from "@/components/fact-card";
-import { HydrationGate } from "@/components/hydration-gate";
 import { Icon } from "@/components/icon";
 import { isWeak } from "@/lib/mastery";
 import { ROUTES } from "@/lib/routes";
@@ -93,11 +92,7 @@ const CategoryPage = () => {
       </div>
     );
   }
-  return (
-    <HydrationGate>
-      <CategoryInner id={id as CategoryId} />
-    </HydrationGate>
-  );
+  return <CategoryInner id={id as CategoryId} />;
 };
 
 export default CategoryPage;
