@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
@@ -41,6 +41,9 @@ const languageJokes = [
   "The guard says no. The guard always says no.",
   "Cheeky. Still English, though.",
 ];
+
+// The quip lingers, then fades on its own if you stop tapping.
+const JOKE_TIMEOUT_MS = 12_000;
 
 // Uniformly picks one of the *other* lines, so the quip never repeats back-to-back.
 const differentJokeIndex = (last: number) =>
@@ -135,6 +138,14 @@ export const SettingsContent = () => {
     lastJoke.current = next;
     setLangJoke((prev) => ({ n: (prev?.n ?? 0) + 1, line: languageJokes[next] }));
   };
+
+  // Each tap makes a fresh langJoke object, so the timer resets while you keep
+  // tapping and only fires once you've left it alone.
+  useEffect(() => {
+    if (!langJoke) return;
+    const t = setTimeout(() => setLangJoke(null), JOKE_TIMEOUT_MS);
+    return () => clearTimeout(t);
+  }, [langJoke]);
 
   if (view === "about") {
     return (
