@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "icons": "zsh scripts/generate-icons.sh",
+    "icons": "uv run --with pillow scripts/generate-icons.py",
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest"
