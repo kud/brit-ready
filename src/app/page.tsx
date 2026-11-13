@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, BookOpenCheck, Gauge, Target, Timer } from "lucide-react";
 import { Mascot } from "@/components/mascot";
+import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { UnionJack } from "@/components/union-jack";
 import { ROUTES } from "@/lib/routes";
@@ -190,13 +191,14 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <footer className="mx-auto w-full max-w-6xl px-5 pt-4 pb-10 text-center text-xs text-faint">
+      <p className="mx-auto w-full max-w-6xl px-5 pt-4 text-center text-xs text-faint">
         Independent, non-official preparation tool — not affiliated with GOV.UK or the Home
         Office.{" "}
         <Link href={ROUTES.about} className="underline">
           Read the disclaimer
         </Link>
-      </footer>
+      </p>
+      <SiteFooter className="pt-3 pb-10" />
     </div>
   );
 };
